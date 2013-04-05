@@ -57,20 +57,34 @@ class TestMain(TestCase):
         command = './greet2 -nJim --name=Joe Jack'
         argv = command.split()
         status_code = greet2.main(argv)
-        self.assertEcho('Hi Jack!')
+        self.assertEcho('Hi Jim,Joe,Jack!')
         self.assertEqual(0, status_code)
 
     def test_long_vs_short_options(self):
         command = './greet2 -nJim --name=Joe'
         argv = command.split()
         status_code = greet2.main(argv)
-        self.assertEcho('Hi Joe!')
+        self.assertEcho('Hi Jim,Joe!')
         self.assertEqual(0, status_code)
 
     def test_many_short_options(self):
         command = './greet2 -nJim -nJoe -nJua'
         argv = command.split()
         status_code = greet2.main(argv)
-        self.assertEcho('Hi Jua!')
+        self.assertEcho('Hi Jim,Joe,Jua!')
         self.assertEqual(0, status_code)
+
+    def test_many_short_options_by_comma(self):
+        command = './greet2 -nJim,Joe,Jua'
+        argv = command.split()
+        status_code = greet2.main(argv)
+        self.assertEcho('Hi Jim,Joe,Jua!')
+        self.assertEqual(0, status_code)
+
+    def test_no_options(self):
+        command = './greet2 -n'
+        argv = command.split()
+        status_code = greet2.main(argv)
+        self.assertEcho(greet2.USAGE)
+        self.assertEqual(1, status_code)
 

@@ -1,4 +1,4 @@
-from getopt import getopt
+from getopt import getopt, GetoptError
 from greet import greet
 import sys
 
@@ -22,17 +22,21 @@ def echo(message):
 
 def main(argv=[]):
     arguments = argv[1:] or sys.argv[1:]
-    opts, args = getopt(arguments, 'n:', ['name='])
-    name = None
-    for option, value in opts:
-        if option in ('-n', '--name'): 
-            name = value 
-    if args:
-        name = args[0]
-    if not name:
+    
+    try:
+        names = list()
+        opts, args = getopt(arguments, 'n:', ['name='])
+        for option, value in opts:
+            if option in ('-n', '--name'): 
+                names.append(value)
+        if args:
+            names.append(args[0])
+    except GetoptError:
+        pass
+    if not names:
         echo(USAGE)
         return 1
-    message = greet(name)
+    message = greet(",".join(names))
     echo(message)
     return 0
 
