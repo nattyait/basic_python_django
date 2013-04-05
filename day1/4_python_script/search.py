@@ -10,9 +10,7 @@ def echo(message):
 
 def main():
 	response = requests.get('http://en.wikipedia.org/wiki/Python')
-	html = response.content
-	soup = BeautifulSoup(html)
-
+	soup = BeautifulSoup(response.content)
 	echo(soup.findAll('p')[0].getText(separator=u' '))
 
 
