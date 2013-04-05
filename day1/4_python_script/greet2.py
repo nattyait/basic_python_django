@@ -29,8 +29,8 @@ def main(argv=[]):
         for option, value in opts:
             if option in ('-n', '--name'): 
                 names.append(value)
-        if args:
-            names.append(args[0])
+        for arg in args:
+            names.append(arg)
     except GetoptError:
         pass
     if not names:
