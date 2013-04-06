@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class='hero-unit'>
+    <h1>Welcome to The star 8</h1>
+</div>
+<div span=4>
+    <ul>
+    {% for competitor in competitors %}
+          <li>
+              <a href="/thestar/vote/?no={{ competitor.no }}" >
+              {{ competitor.name }} ({{ competitor.nick_name }}) No. {{ competitor.no }}
+              </a>
+               Now get {{ competitor.votes.count }} votes!!
+          </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
