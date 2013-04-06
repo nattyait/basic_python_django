@@ -12,8 +12,6 @@ def main():
 	response = requests.get('http://en.wikipedia.org/wiki/Python')
 	soup = BeautifulSoup(response.content)
 	echo(soup.findAll('p')[0].getText(separator=u' '))
-
-
-
+	
 if __name__ == '__main__':
     main()

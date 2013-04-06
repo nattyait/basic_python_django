@@ -11,6 +11,8 @@ class TestSearch(TestCase):
         self.original_echo = search.echo
         search.echo = mocked_echo
 
+        self.orginal_echo
+
     def tearDown(self):
         search.echo = self.original_echo
 
